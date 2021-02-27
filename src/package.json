@@ -5,7 +5,10 @@
         "@symfony/stimulus-bridge": "^2.0.0",
         "@symfony/webpack-encore": "^1.0.0",
         "core-js": "^3.0.0",
+        "deepmerge": "^4.2.2",
         "regenerator-runtime": "^0.13.2",
+        "sass": "^1.32.8",
+        "sass-loader": "^11.0.1",
         "stimulus": "^2.0.0",
         "vue-loader": "^15.9.6",
         "vue-template-compiler": "^2.6.12",
@@ -21,7 +24,8 @@
     },
     "dependencies": {
         "vue": "^2.6.12",
-        "vue-router": "^3.5.1"
+        "vue-router": "^3.5.1",
+        "vuetify": "^2.4.5"
     },
     "browserslist": [
         "> 0.5%",
