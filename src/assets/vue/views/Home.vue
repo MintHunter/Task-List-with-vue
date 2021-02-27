@@ -5,7 +5,7 @@
     </div>
 
     <div class="row col">
-      <p>This is the homepage of our Vue.js application.</p>
+      <p>This is the homepage of our Vue.js application. {{name}}</p>
     </div>
   </div>
 </template>
@@ -13,5 +13,10 @@
 <script>
 export default {
   name: "Home",
+  data() {
+    return {
+      name: 'namename'
+    }
+  }
 };
 </script>
