@@ -7,16 +7,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class PostController extends AbstractController
+class TaskController extends AbstractController
 {
 	/**
-	 * @Route("/getPost", name="getPost")
+	 * @Route("/getTask", name="getTask")
 	 * @return JsonResponse
 	 */
 	public function index(): JsonResponse
 	{
 		return new JsonResponse([
-			'message'=>'message From PostController'
+			'message'=>'message From Task'
 		]);
 	}
 }

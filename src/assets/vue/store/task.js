@@ -1,4 +1,4 @@
-import PostApi from "../api/post";
+import TaskApi from "../api/task";
 
 export default {
     namespaced:true,
@@ -16,8 +16,8 @@ export default {
         }
     },
     actions:{
-         getPosts: async (ctx) =>{
-            let  message = await PostApi.findAll();
+         getTasks: async (ctx) =>{
+            let  message = await TaskApi.findAll();
            // let jsonDecode = message.json();
             ctx.commit('updateMessage',message.data);
             return message.data;
