@@ -5,7 +5,7 @@
     </div>
 
     <div class="row col">
-      <p>This is the homepage of our Vue.js application. ___ {{ message2}}</p>
+      <p>This is the homepage of our Vue.js application. ___ {{  message }}</p>
     </div>
   </div>
 </template>
@@ -18,20 +18,19 @@ export default {
   name: "Home",
   computed: {
     ...mapState({
-      message: state => state.post.message
+      message: state => state.task.data.message
     }),
     ...mapGetters({
       message2: "task/getMessage"
     }),
-
   },
   methods: {
     ...mapActions({
-      getPost: 'task/getTasks'
+      getTasks: 'task/getTasks'
     }),
   },
   async mounted() {
-    await this.getPost();
+     await this.getTasks();
   }
 
 };

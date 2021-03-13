@@ -7,6 +7,6 @@ export default {
         });
     },
     findAll(){
-        return axios.get("/getTask");
+        return axios.get("/getTasks");
     }
 }

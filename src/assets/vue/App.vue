@@ -1,42 +1,39 @@
 <template>
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <v-app>
+    <v-navigation-drawer app>
+      <!-- -->
+    </v-navigation-drawer>
+
+    <v-app-bar app>
       <router-link
           class="navbar-brand"
-          to="/home"
+          to="/"
       >
         App
       </router-link>
-      <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+      <router-link
+          class="navbar-brand"
+          to="/"
       >
-        <span class="navbar-toggler-icon" />
-      </button>
-      <div
-          id="navbarNav"
-          class="collapse navbar-collapse"
-      >
-        <ul class="navbar-nav">
-          <router-link
-              class="nav-item"
-              tag="li"
-              to="/home"
-              active-class="active"
-          >
-            <a class="nav-link">Home</a>
-          </router-link>
-        </ul>
-      </div>
-    </nav>
+        Home
+      </router-link>
+    </v-app-bar>
 
-    <router-view />
-  </div>
+    <!-- Sizes your content based upon application components -->
+    <v-main>
+
+      <!-- Provides the application the proper gutter -->
+      <v-container fluid>
+
+        <!-- If using vue-router -->
+        <router-view></router-view>
+      </v-container>
+    </v-main>
+
+    <v-footer app>
+      <!-- -->
+    </v-footer>
+  </v-app>
 </template>
 
 <script>
