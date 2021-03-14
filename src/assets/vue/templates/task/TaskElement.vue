@@ -3,21 +3,28 @@
       class="mx-auto"
       width="344"
   >
-    <v-card-title>
-       {{ task.title }} <v-icon class="col-sm-6"  color="green accent-3" large title="In progress">mdi-arrow-right-bold</v-icon>
+    <v-card-title :class="textColor">
+      {{ title }}
+      <v-icon class="col-sm-6 " :color="elementColor" small
+              :title="stageName">
+        {{ stageName }}
+      </v-icon>
     </v-card-title>
     <v-card-subtitle>
 
-      <div class="green--text text--accent-3" >Start task date : {{ task.start_time }} </div>
-      <div class="orange--text text--lighten-2">End task date : {{ task.end_time }}</div>
+      <div >Start task date : {{ startTime }}</div>
+
+
+      <div  :style=" {color : dateColor}" >End task date : {{ endTime }}  </div>
+
 
     </v-card-subtitle>
     <v-card-actions>
       <v-btn
-          color="orange lighten-2"
+          color="yellow darken-1"
           text
       >
-        Explore
+        More
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn
@@ -39,16 +46,25 @@
 </template>
 
 <script>
+
 export default {
   name: 'TaskElement',
-  props: {
-    task :{
+  props: [
+    'stageId',
+    'task',
+    'title',
+    'elementColor',
+    'textColor',
+    'stageName',
+    'startTime',
+    'endTime',
+    'diffTime',
+    'dateColor',
 
-    }
-  },
+  ],
   data: () => ({
     show: false,
-
+    date : new Date(),
   })
 }
 </script>

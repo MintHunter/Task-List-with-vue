@@ -15,7 +15,17 @@
         tile
     >
       <task-element
-          v-bind:task="task"
+          :task="task"
+          :stageId="task.work_stage.stage_id"
+          :title="task.title"
+          :elementColor="task.work_stage.vuetify_material.dom_element"
+          :textColor="task.work_stage.vuetify_material.text"
+          :dateColor="task.work_stage.color"
+          :stageName="task.work_stage.name"
+          :startTime="task.start_time"
+          :endTime="task.end_time"
+          :diffTime="task.diff_time"
+
       />
     </v-card>
   </v-card>

@@ -16,7 +16,7 @@ export default {
         },
         getTaskError: (state, error) => {
             state.error = error;
-            state.message = "something went wrong";
+            state.message = error;
             state.isLoading = false;
         },
     },
