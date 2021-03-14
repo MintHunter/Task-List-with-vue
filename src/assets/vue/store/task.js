@@ -5,28 +5,30 @@ export default {
     mutations: {
         taskMessageInAction: (state, message) => {
             state.error = null;
-            state.taskArr = message;
+            state.message = message;
             state.isLoading = true;
         },
         getTaskMessageSuccess: (state, message) => {
             state.error = null;
             state.taskArr = message;
             state.isLoading = true;
+            state.message = '';
         },
         getTaskError: (state, error) => {
             state.error = error;
-            state.taskArr['error_message'] = "something went wrong";
+            state.message = "something went wrong";
             state.isLoading = false;
         },
     },
     state: {
         isLoading: false,
         taskArr: [],
-        error: null
+        error: null,
+        message : ''
     },
     getters: {
         getMessage: (state) => {
-            return state.taskArr
+            return state.message
         }
     },
     actions: {
