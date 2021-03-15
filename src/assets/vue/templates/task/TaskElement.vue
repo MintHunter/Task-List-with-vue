@@ -64,7 +64,6 @@ export default {
   ],
   data: () => ({
     show: false,
-    date : new Date(),
   })
 }
 </script>

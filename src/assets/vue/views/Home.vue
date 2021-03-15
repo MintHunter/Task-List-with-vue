@@ -39,7 +39,6 @@ export default {
   },
   async mounted() {
     this.show = await this.getTasks();
-    console.log(this.taskArr)
   }
 
 };

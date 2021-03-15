@@ -17,6 +17,12 @@
       >
         Home
       </router-link>
+      <router-link
+          class="navbar-brand"
+          to="/register"
+      >
+       Register
+      </router-link>
     </v-app-bar>
 
     <!-- Sizes your content based upon application components -->

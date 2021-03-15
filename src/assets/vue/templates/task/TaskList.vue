@@ -5,8 +5,10 @@
       tile
       color="#121212"
   >
-    {{ message }}
+    <p v-if="message!=''">  {{ message }}</p>
+
     <v-card
+        v-else
         v-for="task in taskArr"
         :key="task.id"
         color="#121212"

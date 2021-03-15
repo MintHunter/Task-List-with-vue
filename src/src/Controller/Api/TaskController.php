@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TaskController extends AbstractController
 {
 	/**
-	 * @Route("/getTasks", name="getTasks")
+	 * @Route("/Api/getTasks", name="getTasks")
 	 * @return JsonResponse
 	 */
 	public function index(): JsonResponse
