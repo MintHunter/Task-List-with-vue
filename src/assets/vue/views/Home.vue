@@ -6,7 +6,7 @@
         tile
         color="#121212"
     >
-      <h1 style="color: #2196f3"> Home page</h1>
+      <h1 class="text-primary"> Home page</h1>
 
     </v-card>
     <task-list
