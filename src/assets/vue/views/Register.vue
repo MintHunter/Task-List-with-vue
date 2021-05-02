@@ -1,78 +1,81 @@
 <template>
   <v-card
-      class="d-flex h-100 justify-center align-items-center "
+      class="d-flex flex-column h-100 align-items-center "
       flat
       tile
       color="#121212">
-    <validation-observer
-        ref="observer"
-        v-slot="{ invalid }"
-    >
-      <form @submit.prevent="submit">
+    <h1 class="text-primary text-center"> Registration page</h1>
+    <div class="d-flex h-100 align-items-center">
+      <validation-observer
+          ref="observer"
+          v-slot="{ invalid }"
+      >
+        <form @submit.prevent="submit">
 
-        <validation-provider
-            v-slot="{ errors,valid }"
-            name="email"
-            rules="required|email"
-        >
-          <v-text-field
-              v-model="email"
-              :error-messages="errors"
-              :success="valid"
-              label="E-mail"
-              required
-          ></v-text-field>
-        </validation-provider>
+          <validation-provider
+              v-slot="{ errors,valid }"
+              name="email"
+              rules="required|email"
+          >
+            <v-text-field
+                v-model="email"
+                :error-messages="errors"
+                :success="valid"
+                label="E-mail"
+                required
+            ></v-text-field>
+          </validation-provider>
 
-        <validation-provider
-            v-slot="{ errors,valid }"
-            name="nickName"
-            rules="required"
-        >
-          <v-text-field
-              v-model="nickName"
-              :error-messages="errors"
-              label="Your Nickname"
-              :success="valid"
+          <validation-provider
+              v-slot="{ errors,valid }"
+              name="nickName"
+              rules="required"
+          >
+            <v-text-field
+                v-model="nickName"
+                :error-messages="errors"
+                label="Your Nickname"
+                :success="valid"
 
-          ></v-text-field>
-        </validation-provider>
+            ></v-text-field>
+          </validation-provider>
 
-        <ValidationProvider rules="required|:@password|confirmed:confirmation" v-slot="{ errors, valid }"
-                            name='password'>
-          <v-text-field
-              v-model="password"
-              ref="password"
-              label="Your Password"
-              type="password"
-              :success="valid"
-              :error-messages="errors"
-          />
-        </ValidationProvider>
+          <ValidationProvider rules="required|:@password|confirmed:confirmation" v-slot="{ errors, valid }"
+                              name='password'>
+            <v-text-field
+                v-model="password"
+                ref="password"
+                label="Your Password"
+                type="password"
+                :success="valid"
+                :error-messages="errors"
+            />
+          </ValidationProvider>
 
-        <ValidationProvider rules=":@password" v-slot="{ errors  }" name='confirmation'
-                            vid="confirmation">
-          <v-text-field
-              v-model="confirmation"
-              label="Repeat your Password"
-              type="password"
-              :error-messages="errors"
-              :success="confirmation.length>0 &&confirmation===password"
+          <ValidationProvider rules=":@password" v-slot="{ errors  }" name='confirmation'
+                              vid="confirmation">
+            <v-text-field
+                v-model="confirmation"
+                label="Repeat your Password"
+                type="password"
+                :error-messages="errors"
+                :success="confirmation.length>0 &&confirmation===password"
 
-          />
-        </ValidationProvider>
-        <v-btn
-            class="mr-4"
-            type="submit"
-            :disabled="invalid"
-        >
-          submit
-        </v-btn>
-        <v-btn @click="clear">
-          clear
-        </v-btn>
-      </form>
-    </validation-observer>
+            />
+          </ValidationProvider>
+          <v-btn
+              class="mr-4"
+              type="submit"
+              :disabled="invalid"
+          >
+            submit
+          </v-btn>
+          <v-btn @click="clear">
+            clear
+          </v-btn>
+        </form>
+      </validation-observer>
+    </div>
   </v-card>
 </template>
 
