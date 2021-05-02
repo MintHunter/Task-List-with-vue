@@ -29,7 +29,7 @@
     <v-main>
 
       <!-- Provides the application the proper gutter -->
-      <v-container fluid>
+      <v-container fluid class="h-100">
 
         <!-- If using vue-router -->
         <router-view></router-view>

@@ -1,55 +1,86 @@
 <template>
-  <validation-observer
-      ref="observer"
-      v-slot="{ invalid }"
-  >
-    <form @submit.prevent="submit">
+  <v-card
+      class="d-flex h-100 justify-center align-items-center "
+      flat
+      tile
+      color="#121212">
+    <validation-observer
+        ref="observer"
+        v-slot="{ invalid }"
+    >
+      <form @submit.prevent="submit">
 
-      <validation-provider
-          v-slot="{ errors }"
-          name="email"
-          rules="required|email"
-      >
-        <v-text-field
-            v-model="email"
-            :error-messages="errors"
-            label="E-mail"
-            required
-        ></v-text-field>
-      </validation-provider>
+        <validation-provider
+            v-slot="{ errors,valid }"
+            name="email"
+            rules="required|email"
+        >
+          <v-text-field
+              v-model="email"
+              :error-messages="errors"
+              :success="valid"
+              label="E-mail"
+              required
+          ></v-text-field>
+        </validation-provider>
 
+        <validation-provider
+            v-slot="{ errors,valid }"
+            name="nickName"
+            rules="required"
+        >
+          <v-text-field
+              v-model="nickName"
+              :error-messages="errors"
+              label="Your Nickname"
+              :success="valid"
 
-      <ValidationProvider rules="required|:@password" v-slot="{ errors, valid }" name='password'>
-        <v-text-field
-            v-model="password"
-            label="New Password"
-            type="password"
-            :success="valid"
-            :error-messages="errors"
-        />
-      </ValidationProvider>
+          ></v-text-field>
+        </validation-provider>
 
+        <ValidationProvider rules="required|:@password|confirmed:confirmation" v-slot="{ errors, valid }"
+                            name='password'>
+          <v-text-field
+              v-model="password"
+              ref="password"
+              label="Your Password"
+              type="password"
+              :success="valid"
+              :error-messages="errors"
+          />
+        </ValidationProvider>
 
-      <v-btn
-          class="mr-4"
-          type="submit"
-          :disabled="invalid"
-      >
-        submit
-      </v-btn>
-      <v-btn @click="clear">
-        clear
-      </v-btn>
-    </form>
-  </validation-observer>
+        <ValidationProvider rules=":@password" v-slot="{ errors  }" name='confirmation'
+                            vid="confirmation">
+          <v-text-field
+              v-model="confirmation"
+              label="Repeat your Password"
+              type="password"
+              :error-messages="errors"
+              :success="confirmation.length>0 &&confirmation===password"
+
+          />
+        </ValidationProvider>
+        <v-btn
+            class="mr-4"
+            type="submit"
+            :disabled="invalid"
+        >
+          submit
+        </v-btn>
+        <v-btn @click="clear">
+          clear
+        </v-btn>
+      </form>
+    </validation-observer>
+  </v-card>
 </template>
 
 <script>
 
-import { required, digits, email, max, regex } from 'vee-validate/dist/rules'
-import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
-import { mapState, mapActions} from 'vuex'
-
+import {required, digits, email, max, regex, confirmed,} from 'vee-validate/dist/rules'
+import {extend, ValidationObserver, ValidationProvider, setInteractionMode} from 'vee-validate'
+import {mapState, mapActions} from 'vuex'
 
 
 setInteractionMode('eager')
@@ -61,7 +92,12 @@ extend('digits', {
 
 extend('required', {
   ...required,
-  message: '{_field_} can not be empty',
+  message: 'this field can not be empty',
+})
+
+extend('confirmed', {
+  ...confirmed,
+  message: 'Passwords must be the same ',
 })
 
 extend('max', {
@@ -87,8 +123,11 @@ export default {
   },
 
   data: () => ({
-    email: 'Email@sdsd.ghhg',
-    password: '123',
+    email: 'e-mail',
+    password: '',
+    nickName: '',
+    confirmation: '',
+
   }),
   computed: {
     ...mapState({
@@ -99,20 +138,16 @@ export default {
     ...mapActions({
       createUser: 'user/createUser',
     }),
-    submit () {
+    submit() {
       this.$refs.observer.validate().then(
-       // this.createUser(this.$data.email,this.$data.password),
+          this.createUser({email: this.$data.email, password: this.$data.password,nickName:this.$data.nickName})
       );
     },
-    clear () {
+    clear() {
       this.email = ''
       this.password = ''
-
       this.$refs.observer.reset()
     },
   },
-  mounted() {
-    this.createUser({email:this.$data.email,password:this.$data.password})
-  }
 }
 </script>
