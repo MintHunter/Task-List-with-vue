@@ -17,17 +17,17 @@ class RegistrationController extends AbstractController
 	 * @Route("/Api/register", name="app_register")
 	 * @param Request $request
 	 * @param UserPasswordEncoderInterface $passwordEncoder
-	 * @return Response
+	 * @return JsonResponse
 	 */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): JsonResponse
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-
+        $message =$request;
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
-            $user->setPassword(
+           /* $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
                     $form->get('plainPassword')->getData()
@@ -36,12 +36,11 @@ class RegistrationController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
-            $entityManager->flush();
+            $entityManager->flush();*/
+			$message = 'success';
             // do anything else you need here, like send an email
-
-            return $this->redirectToRoute('getTasks');
         }
 
-		return $this->render('base.html.twig', []);
+		return new JsonResponse(['Message'=>$message]);
     }
 }

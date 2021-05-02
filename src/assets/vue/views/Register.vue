@@ -19,7 +19,7 @@
       </validation-provider>
 
 
-      <ValidationProvider rules="required|:@password" v-slot="{ errors, valid }" name='new password'>
+      <ValidationProvider rules="required|:@password" v-slot="{ errors, valid }" name='password'>
         <v-text-field
             v-model="password"
             label="New Password"
@@ -48,6 +48,7 @@
 
 import { required, digits, email, max, regex } from 'vee-validate/dist/rules'
 import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
+import { mapState, mapActions} from 'vuex'
 
 
 
@@ -84,14 +85,24 @@ export default {
     ValidationProvider,
     ValidationObserver,
   },
-  data: () => ({
-    email: '',
-    password: '',
-  }),
 
+  data: () => ({
+    email: 'Email@sdsd.ghhg',
+    password: '123',
+  }),
+  computed: {
+    ...mapState({
+      user: state => state.user,
+    }),
+  },
   methods: {
+    ...mapActions({
+      createUser: 'user/createUser',
+    }),
     submit () {
-      this.$refs.observer.validate()
+      this.$refs.observer.validate().then(
+       // this.createUser(this.$data.email,this.$data.password),
+      );
     },
     clear () {
       this.email = ''
@@ -100,5 +111,8 @@ export default {
       this.$refs.observer.reset()
     },
   },
+  mounted() {
+    this.createUser({email:this.$data.email,password:this.$data.password})
+  }
 }
 </script>

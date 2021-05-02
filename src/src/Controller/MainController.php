@@ -10,6 +10,7 @@ class MainController extends AbstractController
 {
     /**
      * @Route("/", name="main")
+     * @Route("/register", name="register")
      * @return Response
      */
     public function index(): Response
