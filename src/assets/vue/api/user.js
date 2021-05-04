@@ -8,8 +8,5 @@ export default {
             userNickName: user.nickName,
         });
 
-    },
-    findAll(){
-        return axios.get("/Api/getTasks");
     }
 }

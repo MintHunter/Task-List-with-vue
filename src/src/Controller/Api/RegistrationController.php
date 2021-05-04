@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class RegistrationController extends AbstractController
 {
 	/**
-	 * @Route("/Api/register", name="app_register")
+	 * @Route("/Api/register", name="app_register" )
 	 * @param Request $request
 	 * @param UserPasswordEncoderInterface $passwordEncoder
 	 * @return JsonResponse
