@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -24,6 +26,10 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
+    /**
+	 * @ORM\OneToMany (targetEntity="TasksList", mappedBy="user_id")
+	 */
+    private $user_list_id;
 
     /**
      * @ORM\Column(type="json")
@@ -40,6 +46,11 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $nickName;
+
+    public function __construct()
+    {
+        $this->user_list_id = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -130,6 +141,36 @@ class User implements UserInterface
     public function setNickName(string $nickName): self
     {
         $this->nickName = $nickName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|TasksList[]
+     */
+    public function getUserListId(): Collection
+    {
+        return $this->user_list_id;
+    }
+
+    public function addUserListId(TasksList $userListId): self
+    {
+        if (!$this->user_list_id->contains($userListId)) {
+            $this->user_list_id[] = $userListId;
+            $userListId->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserListId(TasksList $userListId): self
+    {
+        if ($this->user_list_id->removeElement($userListId)) {
+            // set the owning side to null (unless already changed)
+            if ($userListId->getUserId() === $this) {
+                $userListId->setUserId(null);
+            }
+        }
 
         return $this;
     }
