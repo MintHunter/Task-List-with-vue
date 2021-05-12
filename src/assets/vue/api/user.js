@@ -9,5 +9,14 @@ export default {
             userNickName: user.nickName,
         });
 
+    },
+    auth(user){
+        let bodyUserData = new FormData();
+        return axios.post("/api/login_check",{
+            email: user.email,
+            password: user.password,
+            userNickName: user.nickName,
+        });
+
     }
 }

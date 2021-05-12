@@ -1,12 +1,10 @@
 <?php
-
 namespace App\Controller\Api;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\View\View;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +13,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegistrationController extends AbstractFOSRestController
 {
-
 	/**
 	 * @var UserRepository
 	 */
@@ -49,8 +46,8 @@ class RegistrationController extends AbstractFOSRestController
 		$password = $requestBodyContent->password;
 		$userNickName = $requestBodyContent->userNickName;
 
-		$repositoryUserExist = $this->userRepository->findOneBy(['email' => $email]);
-		if ($repositoryUserExist)
+		$findUser = $this->userRepository->findOneBy(['email' => $email]);
+		if ($findUser)
 			return $this->view(['message' => 'User already exist'], Response::HTTP_CONFLICT); //409 status
 
 		$user = new User();
@@ -65,7 +62,5 @@ class RegistrationController extends AbstractFOSRestController
 		$this->entityManager->flush();
 
 		return $this->view(['message' => 'Successful registration'], Response::HTTP_CREATED); //201 status
-
-
 	}
 }

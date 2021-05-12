@@ -8,6 +8,11 @@ export default {
             state.user =userData;
             state.isLoading = true;
         },
+        authUser: (state,userData) => {
+            state.error = null;
+            state.user =userData;
+            state.isLoading = true;
+        }
     },
     state: {
         isLoading: false,
@@ -22,9 +27,12 @@ export default {
     },
     actions: {
         createUser: async ({commit}, userData) => {
-            console.log(typeof password);
           let response = await UserApi.create(userData)
             commit('createUser', response.data);
+        },
+        authUser: async ({commit},userData)=>{
+            let response = await UserApi.auth(userData)
+            commit('authUser', response.data);
         }
     }
 
