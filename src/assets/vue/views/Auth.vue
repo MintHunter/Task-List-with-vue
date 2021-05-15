@@ -26,20 +26,6 @@
             ></v-text-field>
           </validation-provider>
 
-          <validation-provider
-              v-slot="{ errors,valid }"
-              name="nickName"
-              rules="required"
-          >
-            <v-text-field
-                v-model="nickName"
-                :error-messages="errors"
-                label="Your Nickname"
-                :success="valid"
-
-            ></v-text-field>
-          </validation-provider>
-
           <ValidationProvider rules="required|:@password" v-slot="{ errors, valid }"
                               name='password'>
             <v-text-field
@@ -117,8 +103,6 @@ export default {
   data: () => ({
     email: 'e-mail',
     password: '',
-    nickName: '',
-    confirmation: '',
 
   }),
   computed: {
@@ -128,13 +112,12 @@ export default {
   },
   methods: {
     ...mapActions({
-
+      authUser:'user/authUser'
     }),
     submit() {
-      console.log("let me in duuude");
-      /*this.$refs.observer.validate().then(
-          this.createUser({email: this.$data.email, password: this.$data.password,nickName:this.$data.nickName})
-      );*/
+      this.$refs.observer.validate().then(
+          this.authUser({email: this.$data.email, password: this.$data.password,nickName:this.$data.nickName})
+      );
     },
     clear() {
       this.email = ''

@@ -23,6 +23,12 @@
       >
        Register
       </router-link>
+      <router-link
+          class="navbar-brand"
+          to="/auth"
+      >
+        Auth
+      </router-link>
     </v-app-bar>
 
     <!-- Sizes your content based upon application components -->

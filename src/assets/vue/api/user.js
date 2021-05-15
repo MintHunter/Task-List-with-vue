@@ -2,7 +2,6 @@ import axios from "axios";
 
 export default {
     create(user){
-        let bodyUserData = new FormData();
         return axios.post("/api/register",{
             email: user.email,
             password: user.password,
@@ -11,11 +10,9 @@ export default {
 
     },
     auth(user){
-        let bodyUserData = new FormData();
         return axios.post("/api/login_check",{
-            email: user.email,
+            username: user.email,  //email not working for some reason
             password: user.password,
-            userNickName: user.nickName,
         });
 
     }
