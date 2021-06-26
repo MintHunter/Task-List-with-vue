@@ -132,11 +132,6 @@ export default {
     confirmation: '',
 
   }),
-  computed: {
-    ...mapState({
-      user: state => state.user,
-    }),
-  },
   methods: {
     ...mapActions({
       createUser: 'user/createUser',

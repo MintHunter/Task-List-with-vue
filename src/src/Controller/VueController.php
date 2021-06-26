@@ -17,5 +17,11 @@ class VueController extends AbstractController
 	function index(){
 		return $this->render("base.html.twig");
 	}
+	/**
+	 * @Route ("/test", name="test")
+	 */
+	function test(){
+		return $this->render("test.html.twig");
+	}
 
 }

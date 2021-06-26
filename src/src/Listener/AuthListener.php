@@ -1,6 +1,7 @@
 <?php
 namespace App\Listener;
 
+use FOS\RestBundle\View\View;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Symfony\Component\HttpFoundation\Cookie;
 
@@ -19,6 +20,8 @@ class AuthListener
 		$response = $event-> getResponse();
 		$data = $event->getData();
 		$token = $data['token'];
+		$username = $data;
+
 		unset ($data['token']);
 		unset($data['refresh_token']);
 		$event->setData($data);

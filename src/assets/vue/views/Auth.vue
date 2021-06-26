@@ -101,7 +101,7 @@ export default {
   },
 
   data: () => ({
-    email: 'e-mail',
+    email: 'admin@test.test',
     password: '',
 
   }),
@@ -117,6 +117,7 @@ export default {
     submit() {
       this.$refs.observer.validate().then(
           this.authUser({email: this.$data.email, password: this.$data.password,nickName:this.$data.nickName})
+              .then(this.user.email = this.$data.email)
       );
     },
     clear() {

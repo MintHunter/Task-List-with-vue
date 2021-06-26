@@ -11,7 +11,7 @@ export default {
     },
     auth(user){
         return axios.post("/api/login_check",{
-            username: user.email,  //email not working for some reason
+            username: user.email,  //i set email in package but it sill not working for some reason
             password: user.password,
         });
 
